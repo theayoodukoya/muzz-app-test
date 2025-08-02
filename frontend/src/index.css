@@ -1,0 +1,62 @@
+@import 'tailwindcss';
+
+/* Mobile-responsive chat layout */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .pb-safe {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+}
+
+/* Ensure proper viewport handling on mobile */
+@media screen and (max-width: 768px) {
+  html {
+    height: 100%;
+    height: -webkit-fill-available;
+  }
+
+  body {
+    height: 100%;
+    height: -webkit-fill-available;
+  }
+
+  #root {
+    height: 100%;
+    height: -webkit-fill-available;
+  }
+}
+
+/* Handle mobile keyboard appearance */
+@media screen and (max-width: 768px) {
+  .chat-container {
+    height: 100vh;
+    height: -webkit-fill-available;
+  }
+}
+
+/* Prevent overscroll bounce on iOS */
+.overscroll-contain {
+  overscroll-behavior: contain;
+}
+
+/* Smooth scrolling for message containers */
+.scroll-smooth {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar for webkit browsers */
+.overflow-y-auto::-webkit-scrollbar {
+  width: 6px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.5);
+  border-radius: 3px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.7);
+}
