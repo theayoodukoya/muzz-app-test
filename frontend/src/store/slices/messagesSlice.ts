@@ -133,9 +133,12 @@ const messagesSlice = createSlice({
           // Don't set status for received messages
         }
         state.messages.push(message);
-        console.log('Added message to Redux store:', message);
       } else {
-        console.log('Message already exists, skipping:', message.id);
+        console.warn(
+          'Message already exists, skipping duplicate:',
+          message.id,
+          message.content
+        );
       }
     },
     updateMessageStatus: (
@@ -146,7 +149,6 @@ const messagesSlice = createSlice({
       const message = state.messages.find((m) => m.id === messageId);
       if (message) {
         message.status = status;
-        console.log(`Updated message ${messageId} status to ${status}`);
       }
     },
     markMessagesAsRead: (
@@ -186,7 +188,6 @@ const messagesSlice = createSlice({
 
         // Add message to store
         state.messages.push(newMessage);
-        console.log('Message sent successfully:', action.payload);
       })
       .addCase(sendMessage.rejected, (state, action) => {
         state.loading = false;

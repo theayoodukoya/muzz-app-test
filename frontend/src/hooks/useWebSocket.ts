@@ -24,25 +24,19 @@ export const useWebSocket = ({
 
     socketRef.current.on('connect', () => {
       setIsConnected(true);
-      console.log('Connected to WebSocket server');
     });
 
     socketRef.current.on('disconnect', () => {
       setIsConnected(false);
-      console.log('Disconnected from WebSocket server');
     });
 
     socketRef.current.on('new-message', (message: Message) => {
-      console.log('Received new message:', message);
       onNewMessage(message);
     });
 
     socketRef.current.on(
       'typing-status',
       ({ userId: typingUserId, isTyping }) => {
-        console.log(
-          `User ${typingUserId} ${isTyping ? 'started' : 'stopped'} typing`
-        );
         if (onTypingStatus) {
           onTypingStatus(typingUserId, isTyping);
         }
@@ -61,7 +55,6 @@ export const useWebSocket = ({
         recipientId
       )}`;
       socketRef.current.emit('join-conversation', conversationId);
-      console.log(`Joined conversation: ${conversationId}`);
     }
   }, [userId, recipientId]);
 
@@ -77,9 +70,7 @@ export const useWebSocket = ({
         userId,
         recipientId
       )}`;
-      console.log(
-        `Sending typing status: ${isTyping} to conversation: ${conversationId}`
-      );
+
       socketRef.current.emit('typing-status', {
         conversationId,
         userId,

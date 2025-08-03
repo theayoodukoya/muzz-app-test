@@ -31,10 +31,6 @@ export const useWebSocketRedux = ({
     socketRef.current.on('connect', () => {
       setIsConnected(true);
       dispatch(setConnectionStatus('connected'));
-      console.log(
-        '[WebSocket] Connected to server with ID:',
-        socketRef.current?.id
-      );
 
       // Rejoin conversation if we have one
       if (currentConversationRef.current) {
@@ -42,17 +38,12 @@ export const useWebSocketRedux = ({
           'join-conversation',
           currentConversationRef.current
         );
-        console.log(
-          '[WebSocket] Rejoined conversation:',
-          currentConversationRef.current
-        );
       }
     });
 
-    socketRef.current.on('disconnect', (reason) => {
+    socketRef.current.on('disconnect', () => {
       setIsConnected(false);
       dispatch(setConnectionStatus('disconnected'));
-      console.log('[WebSocket] Disconnected from server. Reason:', reason);
     });
 
     socketRef.current.on('connect_error', (error) => {
@@ -61,8 +52,6 @@ export const useWebSocketRedux = ({
     });
 
     socketRef.current.on('new-message', (message: Message) => {
-      console.log('[WebSocket] Received new message:', message);
-
       // Validate message structure
       if (!message.id || !message.timestamp || !message.content) {
         console.error('[WebSocket] Invalid message received:', message);
@@ -79,7 +68,6 @@ export const useWebSocketRedux = ({
     });
 
     return () => {
-      console.log('[WebSocket] Cleaning up connection');
       socketRef.current?.disconnect();
     };
   }, [dispatch, userId, recipientId]);
@@ -94,13 +82,11 @@ export const useWebSocketRedux = ({
       currentConversationRef.current = conversationId;
 
       socketRef.current.emit('join-conversation', conversationId);
-      console.log(`[WebSocket] ✅ JOINED conversation: ${conversationId}`);
     }
   }, [userId, recipientId, isConnected, dispatch]);
 
   const sendMessage = (message: Omit<Message, 'id' | 'timestamp'>) => {
     if (socketRef.current && isConnected) {
-      console.log('[WebSocket] ✅ SENDING message:', message);
       socketRef.current.emit('send-message', message);
     } else {
       console.warn(

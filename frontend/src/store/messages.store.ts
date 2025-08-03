@@ -70,7 +70,7 @@ const sampleMessages: Message[] = [
   },
 ];
 
-const useMessagesStore = create<MessagesState>()((set, get) => ({
+const useMessagesStore = create<MessagesState>()((set) => ({
   messages: sampleMessages,
   createMessage: (message: MessageInput) =>
     set((state) => {
@@ -81,7 +81,7 @@ const useMessagesStore = create<MessagesState>()((set, get) => ({
         content: message.content,
         timestamp: new Date().toISOString(),
       };
-      console.log('Creating local message:', newMessage);
+
       return { messages: [...state.messages, newMessage] };
     }),
   addMessage: (message: Message) =>
@@ -99,15 +99,9 @@ const useMessagesStore = create<MessagesState>()((set, get) => ({
       );
 
       if (messageExists) {
-        console.log(
-          'Message already exists, skipping:',
-          message.id,
-          message.content
-        );
         return state;
       }
 
-      console.log('Adding WebSocket message to store:', message);
       return { messages: [...state.messages, message] };
     }),
 }));

@@ -22,10 +22,6 @@ const chatSlice = createSlice({
     ) => {
       state.connectionStatus = action.payload;
       state.isConnected = action.payload === 'connected';
-      console.log(`[Redux] Connection status updated:`, {
-        status: action.payload,
-        isConnected: state.isConnected,
-      });
     },
     addTypingUser: (state, action: PayloadAction<number>) => {
       if (!state.typingUsers.includes(action.payload)) {

@@ -81,8 +81,6 @@ const ChatTab = ({ highlightedMessageId, onScrollToMessage }: ChatTabProps) => {
     messages,
   ]);
 
-  console.log('Current messages for conversation:', messages.length);
-
   // Group messages by time and sender with safe date handling
   const groupedMessages: Message[][] = [];
   let currentGroup: Message[] = [];
@@ -263,8 +261,6 @@ const ChatTab = ({ highlightedMessageId, onScrollToMessage }: ChatTabProps) => {
       recipientId: currentRecipient.id,
       content: formattedContent,
     };
-
-    console.log('Sending message:', newMessage);
 
     // Dispatch Redux action for local store (this will handle status updates)
     dispatch(sendMessageAction(newMessage));
