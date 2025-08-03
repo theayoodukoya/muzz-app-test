@@ -22,7 +22,7 @@ const MessageStatusComponent = ({
           <div
             className='flex items-center gap-1'
             role='img'
-            aria-label='Sending message'
+            aria-label='Sending'
           >
             <div
               className='w-3 h-3 border-2 border-pink-200 border-t-white rounded-full animate-spin'
@@ -36,7 +36,7 @@ const MessageStatusComponent = ({
             size={14}
             className='text-pink-200'
             role='img'
-            aria-label='Message sent'
+            aria-label='Sent'
           />
         );
       case 'delivered':
@@ -45,7 +45,7 @@ const MessageStatusComponent = ({
             size={14}
             className='text-pink-200'
             role='img'
-            aria-label='Message delivered'
+            aria-label='Delivered'
           />
         );
       case 'read':
@@ -54,7 +54,7 @@ const MessageStatusComponent = ({
             size={14}
             className='text-blue-400'
             role='img'
-            aria-label='Message read'
+            aria-label='Read'
           />
         );
       default:
@@ -77,30 +77,13 @@ const MessageStatusComponent = ({
     }
   };
 
-  const getStatusDescription = () => {
-    switch (status) {
-      case 'sending':
-        return 'Your message is being sent';
-      case 'sent':
-        return 'Your message has been sent';
-      case 'delivered':
-        return 'Your message has been delivered';
-      case 'read':
-        return 'Your message has been read';
-      default:
-        return '';
-    }
-  };
-
   return (
     <div
       className='flex items-center gap-1'
       title={getStatusLabel()}
-      aria-label={getStatusDescription()}
       role='status'
     >
       {getStatusIcon()}
-      <span className='sr-only'>{getStatusDescription()}</span>
     </div>
   );
 };

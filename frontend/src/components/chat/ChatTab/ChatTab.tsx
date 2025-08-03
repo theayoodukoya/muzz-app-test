@@ -8,6 +8,7 @@ import {
   format,
   differenceInHours,
   differenceInSeconds,
+  differenceInMinutes,
   isValid,
 } from 'date-fns';
 import type { Message, MessageInput } from '@/store/slices/messagesSlice';
@@ -125,7 +126,7 @@ const ChatTab = ({ highlightedMessageId, onScrollToMessage }: ChatTabProps) => {
     groupedMessages.push(currentGroup);
   }
 
-  // Add timestamp headers with improved logic for new messages
+  // Add timestamp headers with aggressive logic for new messages
   const messagesWithHeaders: Array<
     | { type: 'header'; timestamp: string; content: string }
     | { type: 'group'; messages: Message[] }
@@ -148,14 +149,18 @@ const ChatTab = ({ highlightedMessageId, onScrollToMessage }: ChatTabProps) => {
       groupTime.toDateString() ===
       new Date(now.getTime() - 24 * 60 * 60 * 1000).toDateString();
 
-    // Determine if we need a new header
+    // More aggressive header logic - show headers for recent messages
+    const minutesSinceLastHeader = lastHeaderTime
+      ? differenceInMinutes(groupTime, lastHeaderTime)
+      : Number.POSITIVE_INFINITY;
+    const hoursFromNow = differenceInHours(now, groupTime);
+
     const needsNewHeader =
       !lastHeaderTime || // First header
       groupTime.toDateString() !== lastHeaderTime.toDateString() || // Different day
-      differenceInHours(groupTime, lastHeaderTime) >= 1 || // 1+ hour gap
-      (isToday &&
-        differenceInHours(now, groupTime) < 1 &&
-        differenceInHours(groupTime, lastHeaderTime) >= 0.5); // Recent messages with 30+ min gap
+      (isToday && hoursFromNow < 1 && minutesSinceLastHeader >= 5) || // Recent messages: 5+ minute gap
+      (isToday && hoursFromNow >= 1 && minutesSinceLastHeader >= 30) || // Older today messages: 30+ minute gap
+      (!isToday && differenceInHours(groupTime, lastHeaderTime) >= 1); // Other days: 1+ hour gap
 
     if (needsNewHeader) {
       let headerContent: string;

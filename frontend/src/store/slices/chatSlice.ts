@@ -1,11 +1,13 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 export interface ChatState {
+  typingUsers: number[];
   isConnected: boolean;
   connectionStatus: 'connecting' | 'connected' | 'disconnected' | 'error';
 }
 
 const initialState: ChatState = {
+  typingUsers: [],
   isConnected: false,
   connectionStatus: 'disconnected',
 };
@@ -25,8 +27,26 @@ const chatSlice = createSlice({
         isConnected: state.isConnected,
       });
     },
+    addTypingUser: (state, action: PayloadAction<number>) => {
+      if (!state.typingUsers.includes(action.payload)) {
+        state.typingUsers.push(action.payload);
+      }
+    },
+    removeTypingUser: (state, action: PayloadAction<number>) => {
+      state.typingUsers = state.typingUsers.filter(
+        (id) => id !== action.payload
+      );
+    },
+    clearTypingUsers: (state) => {
+      state.typingUsers = [];
+    },
   },
 });
 
-export const { setConnectionStatus } = chatSlice.actions;
+export const {
+  setConnectionStatus,
+  addTypingUser,
+  removeTypingUser,
+  clearTypingUsers,
+} = chatSlice.actions;
 export default chatSlice.reducer;

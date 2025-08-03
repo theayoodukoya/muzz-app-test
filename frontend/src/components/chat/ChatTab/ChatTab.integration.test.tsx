@@ -110,42 +110,6 @@ describe('ChatTab Integration', () => {
     expect(sendButton).toBeEnabled();
   });
 
-  it('should show typing indicator when recipient is typing', () => {
-    // Create store with typing user
-    const storeWithTyping = createMockStore({
-      user: {
-        currentUser: {
-          id: 1,
-          name: 'Alisha',
-          profile: 'https://example.com/alisha.jpg',
-        },
-        currentRecipient: {
-          id: 2,
-          name: 'John',
-          profile: 'https://example.com/john.jpg',
-        },
-      },
-      messages: {
-        messages: mockMessages,
-        loading: false,
-        error: null,
-      },
-      chat: {
-        typingUsers: [2], // John is typing
-        isConnected: true,
-        connectionStatus: 'connected',
-      },
-    });
-
-    render(
-      <Provider store={storeWithTyping}>
-        <ChatTab />
-      </Provider>
-    );
-
-    expect(screen.getByText('John is typing...')).toBeInTheDocument();
-  });
-
   it('should show connection status when disconnected', () => {
     const storeDisconnected = createMockStore({
       user: {

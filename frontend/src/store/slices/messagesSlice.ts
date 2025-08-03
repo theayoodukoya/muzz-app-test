@@ -27,14 +27,14 @@ export interface MessagesState {
   error: string | null;
 }
 
-// Sample messages for demo with status
+// Reduced sample messages - just a few to show the concept
 const sampleMessages: Message[] = [
   {
     id: 1,
     senderId: 1,
     recipientId: 2,
     content: 'Hey John! How are you doing?',
-    timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+    timestamp: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(), // 4 hours ago
     status: 'read',
   },
   {
@@ -43,40 +43,25 @@ const sampleMessages: Message[] = [
     recipientId: 1,
     content: "Hi Alisha! I'm doing great, thanks for asking!",
     timestamp: new Date(
-      Date.now() - 2 * 60 * 60 * 1000 + 10 * 1000
-    ).toISOString(),
+      Date.now() - 4 * 60 * 60 * 1000 + 10 * 1000
+    ).toISOString(), // 4 hours ago + 10 seconds
   },
   {
     id: 3,
-    senderId: 2,
-    recipientId: 1,
-    content: 'How about you?',
-    timestamp: new Date(
-      Date.now() - 2 * 60 * 60 * 1000 + 15 * 1000
-    ).toISOString(),
-  },
-  {
-    id: 4,
-    senderId: 1,
-    recipientId: 2,
-    content: "I'm doing well too! Just working on some projects.",
-    timestamp: new Date(Date.now() - 30 * 60 * 1000).toISOString(),
-    status: 'delivered',
-  },
-  {
-    id: 5,
     senderId: 1,
     recipientId: 3,
     content: 'Hi Maddie! Want to grab coffee later?',
-    timestamp: new Date(Date.now() - 15 * 60 * 1000).toISOString(),
+    timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(), // 2 hours ago
     status: 'read',
   },
   {
-    id: 6,
+    id: 4,
     senderId: 3,
     recipientId: 1,
     content: 'That sounds great! What time works for you?',
-    timestamp: new Date(Date.now() - 10 * 60 * 1000).toISOString(),
+    timestamp: new Date(
+      Date.now() - 2 * 60 * 60 * 1000 + 5 * 60 * 1000
+    ).toISOString(), // 2 hours ago + 5 minutes
   },
 ];
 

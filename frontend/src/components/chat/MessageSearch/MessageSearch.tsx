@@ -1,3 +1,5 @@
+'use client';
+
 import type React from 'react';
 
 import { useState, useEffect, useRef } from 'react';
@@ -111,7 +113,7 @@ const MessageSearch = ({
 
   return (
     <div
-      className='fixed inset-0 bg-black opacity-[90%] z-50 flex items-start justify-center pt-20'
+      className='fixed inset-0 bg-black bg-opacity-50 z-50 flex items-start justify-center pt-20'
       role='dialog'
       aria-modal='true'
       aria-labelledby='search-dialog-title'
@@ -136,7 +138,7 @@ const MessageSearch = ({
                 id='message-search-input'
                 ref={searchInputRef}
                 type='search'
-                placeholder="Search messages... (try 'hello', 'hello again', etc.)"
+                placeholder="Search messages..."
                 className='w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#e8506e] focus:ring-2 focus:ring-[#e8506e]'
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -148,7 +150,7 @@ const MessageSearch = ({
             <button
               onClick={onClose}
               className='p-2 hover:bg-gray-100 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#e8506e]'
-              aria-label='Close message search dialog'
+              aria-label='Close search'
               type='button'
             >
               <X size={20} aria-hidden='true' />
@@ -339,9 +341,6 @@ const MessageSearch = ({
               <h2 className='text-base font-medium mb-2'>
                 Search Your Messages
               </h2>
-              <p className='mb-3'>
-                Start typing to search through your conversation history
-              </p>
             </section>
           )}
         </main>
