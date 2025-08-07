@@ -17,7 +17,7 @@ export const apiSlice = createApi({
     }),
     getUser: builder.query<User, number>({
       query: (id) => `/user/${id}.json`,
-      providesTags: (result, error, id) => [{ type: 'User', id }],
+      providesTags: (_result, _error, id) => [{ type: 'User', id }],
     }),
 
     // Messages endpoints - removed non-existent endpoints

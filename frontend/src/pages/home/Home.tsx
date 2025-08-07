@@ -19,7 +19,7 @@ const Home = () => {
           <h1
             className='text-3xl font-bold text-gray-800 tracking-tight'
             role='heading'
-            aria-level='1'
+            aria-level={1}
           >
             Muzz
           </h1>

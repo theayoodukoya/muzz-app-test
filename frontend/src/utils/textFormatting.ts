@@ -11,7 +11,7 @@ export const formatMessageText = (text: string): string => {
   // Capitalize first letter after sentence endings (. ! ?) followed by space
   formatted = formatted.replace(
     /([.!?]\s+)([a-z])/g,
-    (match, punctuation, letter) => {
+    (_match, punctuation, letter) => {
       return punctuation + letter.toUpperCase();
     }
   );
@@ -40,13 +40,13 @@ export const formatInputText = (
 
   // Only capitalize "i" when it's a standalone word (surrounded by word boundaries)
   // This prevents capitalizing "i" in words like "this", "is", "it", etc.
-  const originalFormatted = formatted;
+  // const originalFormatted = formatted;
   formatted = formatted.replace(/\b[iI]\b/g, 'I');
 
   // Only capitalize after sentence endings if there's already a space and lowercase letter
   formatted = formatted.replace(
     /([.!?]\s+)([a-z])/g,
-    (match, punctuation, letter) => {
+    (_match, punctuation, letter) => {
       return punctuation + letter.toUpperCase();
     }
   );
