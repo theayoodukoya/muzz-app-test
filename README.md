@@ -109,17 +109,17 @@ cd backend && npm run build
 muzz/
 ├── frontend/
 │   ├── src/
-│   │   ├── components/          # Atomic design components
-│   │   │   ├── ui/             # Reusable primitives
-│   │   │   └── chat/           # Feature-specific components
-│   │   ├── pages/              # Route-level orchestration
-│   │   ├── hooks/              # Custom React hooks
-│   │   ├── store/              # Redux architecture
-│   │   ├── utils/              # Pure utility functions
-│   │   ├── types/              # TypeScript definitions
-│   │   ├── constants/          # Configuration values
-│   │   └── test/               # Testing infrastructure
-│   └── public/                 # Static assets & mock data
+│   │   ├── components/          
+│   │   │   ├── ui/             
+│   │   │   └── chat/           
+│   │   ├── pages/             
+│   │   ├── hooks/             
+│   │   ├── store/             
+│   │   ├── utils/              
+│   │   ├── types/              
+│   │   ├── constants/          
+│   │   └── test/             
+│   └── public/                 
 ├── backend/
 │   └── src/
 │       ├── models/             # Data models
